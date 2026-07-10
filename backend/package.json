@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
+    "axios": "^1.18.1",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "nodemon": "^3.1.14",
+    "pg": "^8.22.0",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^4.3.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  }
+}
