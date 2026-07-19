@@ -21,9 +21,10 @@ const getPost = async (currentUserId) =>{
   u.id AS user_id, 
   u.username,
  
-  (SELECT COUNT(*)::int FROM app_likes as l WHERE l.post_id = p.id) AS like_count,
+  (select count(*)::int from app_likes as l where l.post_id = p.id) AS like_count,
+  (select count(*)::int from app_comments as c where c.post_id = p.id ) as comment_count ,
   EXISTS(
-    SELECT 1 FROM app_likes as ml WHERE ml.post_id = p.id AND ml.user_id = $1
+    select 1 from app_likes as ml WHERE ml.post_id = p.id AND ml.user_id = $1
   ) AS liked
 FROM app_posts AS p
 JOIN app_users AS u ON u.id = p.user_id 

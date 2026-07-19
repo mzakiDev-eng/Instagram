@@ -1,11 +1,17 @@
 "use client"
 import React from "react";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link" ;
 import Feed from "../post/Feed";
 const Layout = () => {
     const pathname = usePathname();
+    const router = useRouter();
+
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      router.push("/login");
+    };
   const menuItem = [
     { name: "Home", icon: "/home.svg" , href: "/" },
     { name: "Search", icon: "/search.svg" , href: "/search"},
@@ -59,6 +65,28 @@ const Layout = () => {
 })}
 
         </nav>
+
+        <button
+          onClick={handleLogout}
+          className="group mt-auto flex items-center gap-3 p-2 rounded-lg font-bold text-gray-300 hover:bg-red-500/10 hover:text-red-500 transition cursor-pointer"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-gray-300 group-hover:text-red-500 transition"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+          <span className="font-medium mt-1">Logout</span>
+        </button>
       </aside>
       <div className="flex  min-h-screen px-4 bg-black">
       <main className="flex-1 border-gray-700">
@@ -88,7 +116,6 @@ const Layout = () => {
         <h3 className="text-white font-semibold text-sm mb-4">
           Suggestions for you
         </h3>
-        
       </aside>
 
 

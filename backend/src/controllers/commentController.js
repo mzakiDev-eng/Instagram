@@ -7,14 +7,14 @@ const createComment = async (req , res) =>{
     const {content} = req.body ;
     if(!content || !content.trim())
     {
-        res.status(400).json({
+        return res.status(400).json({
             success: false ,
             message: 'content will be required'
         })
     }
 
     const comment = await Comment.addComment(postId, userId , content.trim());
-    res.status(201).json({
+      return res.status(201).json({
         success: true ,
         message: 'comment will be added successfully',
         comment
@@ -22,9 +22,10 @@ const createComment = async (req , res) =>{
     
   } catch (error)
    {
+      console.error('createComment error:', error);
       res.status(500).json({
         success: false ,
-        message: 'comment will not added till now.'
+        message: error.message
       })
   }
 }
@@ -32,11 +33,11 @@ const createComment = async (req , res) =>{
 const getComments = async (req ,res) =>{
     try {
         const postId = req.params.postId ;
-        const comment = await Comment.getComment(postId);
+        const comments = await Comment.getComment(postId);
         res.status(200).json({
             success: true ,
             message: 'getComments fetch successfully',
-            comment
+            comments
         })
     } catch (error) {
         res.status(500).json({
