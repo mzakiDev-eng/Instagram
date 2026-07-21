@@ -15,7 +15,7 @@ const toggelFollow = async (req, res)=>{
 
     }
     
-    const existingUser = await Follow.findFollwer(followerId , followingId);
+    const existingUser = await Follow.findFollower(followerId , followingId);
      let following ;
      if(existingUser)
      {
@@ -29,7 +29,7 @@ const toggelFollow = async (req, res)=>{
      }
 
      const followerCount = await Follow.countFollower(followingId);
-     const followingCount = await Follow.countFollowing(followerCount)
+     const followingCount = await Follow.countFollowing(followerId);
      return res.status(200).json({
         success: true ,
         message: following ? 'Follow Successfully ' : 'UnfollowSuccessfully',

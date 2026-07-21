@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { SERVER_URL } from "../../lib/api";
 import api from "../../lib/api";
+import FollowButton from "../user/FollowButton";
 
 const timeAgo = (dateString) => {
   const seconds = Math.floor(
@@ -34,6 +35,11 @@ const PostCard = ({ post }) => {
   const [commentCount, setCommentCount] = useState(post.comment_count || 0);
   const [commentLoading, setCommentLoading] = useState(false);
   const [commentsLoaded, setCommentsLoaded] = useState(false);
+  const [currentUserId] = useState(() =>
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user") || "null")?.id
+      : null
+  );
   const handleLike = async () => {
     if (loading) return;
     setLoading(true);
@@ -101,6 +107,13 @@ const PostCard = ({ post }) => {
         <span className="text-white text-sm font-semibold">
           {post.username}
         </span>
+        {String(currentUserId) !== String(post.user_id) && (
+          <FollowButton
+            userId={post.user_id}
+            initialFollowing={post.is_following}
+            initialFollowerCount={post.follower_count}
+          />
+        )}
         <span className="text-gray-500 text-xs ml-auto">
           {timeAgo(post.created_at)}
         </span>
