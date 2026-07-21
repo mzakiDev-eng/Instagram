@@ -29,11 +29,13 @@ const toggelFollow = async (req, res)=>{
      }
 
      const followerCount = await Follow.countFollower(followingId);
+     const followingCount = await Follow.countFollowing(followerCount)
      return res.status(200).json({
         success: true ,
         message: following ? 'Follow Successfully ' : 'UnfollowSuccessfully',
         following,
-        followerCount
+        followerCount,
+        followingCount
      });
     } catch (error) {
         res.status(500).json({

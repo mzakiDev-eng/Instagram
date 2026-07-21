@@ -157,11 +157,15 @@ const PostCard = ({ post }) => {
           {comments.length === 0 ? (
             <p className="text-gray-500 text-sm mb-3">No comments yet.</p>
           ) : (
-            <div className="space-y-2 mb-3">
+            <div className="space-y-2 mb-3 ">
               {comments.map((item) => (
-                <div key={item.id} className="text-sm text-white">
-                  <span className="font-semibold mr-2">{item.username}</span>
-                  {item.content}
+                <div key={item.id} className="text-sm text-white flex gap-1">
+                  <span className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white text-xs font-bold">
+                    {item.username?.[0]?.toUpperCase()}
+                  </span>
+                  <span className="font-semibold mr-2 mt-1">{item.username}</span>
+                  <span className="font-semibold mr-2 mt-1">{item.content}</span>
+                  
                 </div>
               ))}
             </div>
