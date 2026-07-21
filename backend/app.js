@@ -28,6 +28,7 @@ app.use('/api/auth' , authRoutes);
 app.use('/api/posts' , postRoutes);
 app.use('/api/likes' ,likeRoutes);
 app.use('/api/comments' , commentRoutes);
+app.use('/api/users' , userRoutes);
 
 
 module.exports = app ;
